@@ -4,32 +4,23 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 
-public class DBConnectionUtility {
-
-	public static Connection getDBConnection() {
-
-		String DATASOURCE_CONTEXT = "java:comp/env/jdbc/crudDB";
-
-		Connection result = null;
-		try {
-			Context initialContext = new InitialContext();
-			DataSource datasource = (DataSource) initialContext.lookup(DATASOURCE_CONTEXT);
-			if (datasource != null) {
-				result = datasource.getConnection();
-			} else {
-				log("Failed to lookup datasource.");
-			}
-		} catch (NamingException ex) {
-			log("Cannot get connection: " + ex);
-		} catch (SQLException ex) {
-			log("Cannot get connection: " + ex);
-		} catch (Throwable te) {
-			te.printStackTrace();
-		}
-		return result;
-	}
-
-	private static void log(Object aObject) {
-		System.out.println(aObject);
-	}
-}
+private static Connection getRemoteConnection() {
+    if (System.getProperty("RDS_HOSTNAME") != null) {
+      try {
+      Class.forName("org.postgresql.Driver");
+      String dbName = System.getProperty("RDS_DB_NAME");
+      String userName = System.getProperty("RDS_USERNAME");
+      String password = System.getProperty("RDS_PASSWORD");
+      String hostname = System.getProperty("RDS_HOSTNAME");
+      String port = System.getProperty("RDS_PORT");
+      String jdbcUrl = "jdbc:postgresql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
+      logger.trace("Getting remote connection with connection string from environment variables.");
+      Connection con = DriverManager.getConnection(jdbcUrl);
+      logger.info("Remote connection successful.");
+      return con;
+    }
+    catch (ClassNotFoundException e) { logger.warn(e.toString());}
+    catch (SQLException e) { logger.warn(e.toString());}
+    }
+    return null;
+  }
