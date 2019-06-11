@@ -4,7 +4,7 @@ import java.sql.*;
 import javax.naming.*;
 import javax.sql.*;
 
-public static DBConnectionUtility{
+public class DBConnectionUtility {
     public static Connection getRemoteConnection() {
         if (System.getProperty("RDS_HOSTNAME") != null) {
         try {
