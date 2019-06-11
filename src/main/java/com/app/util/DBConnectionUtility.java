@@ -16,13 +16,13 @@ public class DBConnectionUtility {
         String hostname = System.getProperty("RDS_HOSTNAME");
         String port = System.getProperty("RDS_PORT");
         String jdbcUrl = "jdbc:postgresql://" + hostname + ":" + port + "/" + dbName + "?user=" + userName + "&password=" + password;
-        logger.trace("Getting remote connection with connection string from environment variables.");
+        log("Getting remote connection with connection string from environment variables.");
         Connection con = DriverManager.getConnection(jdbcUrl);
-        logger.info("Remote connection successful.");
+        log("Remote connection successful.");
         return con;
         }
-        catch (ClassNotFoundException e) { logger.warn(e.toString());}
-        catch (SQLException e) { logger.warn(e.toString());}
+        catch (ClassNotFoundException ex) { log("class not found");}
+        catch (SQLException ex) { log("class not found");}
         }
         return null;
     }
