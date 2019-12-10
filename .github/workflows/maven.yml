@@ -16,4 +16,4 @@ jobs:
     - name: Build with Maven
       run: mvn -B package --file pom.xml
     - name: maven deploy
-      run: mvn deploy
+      run: mvn deploy -Dtoken=GH_TOKEN
