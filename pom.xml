@@ -58,7 +58,7 @@
    		<repository>
      		<id>github</id>
      		<name>GitHub OWNER Apache Maven Packages</name>
-     		<url>https://www.github.com/kcreddyv/crudApp</url>
+     		<url>https://maven.pkg.github.com/kcreddyv/crudApp</url>
    		</repository>
 	</distributionManagement>
 
