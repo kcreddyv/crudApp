@@ -7,6 +7,13 @@
 	<packaging>war</packaging>
 	<name>Simple crud app</name>
 	<description>CRUD application demo</description>
+	 <servers>
+    		<server>
+      		<id>github</id>
+      		<username>kcreddyv</username>
+      		<password>74d1adb7e98d5afd9ae7a92a864ddde3d9c15b75</password>
+   		 </server>
+  	</servers>
 	<dependencies>
 		<dependency>
 			<groupId>javax.servlet</groupId>
